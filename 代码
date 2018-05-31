@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body {
+            height: 100%;
+            width: 100%
+        }
+        .waterfall {
+            position: relative;
+            width: 500px;
+            height: 100%;
+        }
+        img {
+            position: absolute;
+            margin: 2px;
+        }
+    </style>
+     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <div class="waterfall">
+        <img src="http://via.placeholder.com/100x141" alt="1">
+        <img src="http://via.placeholder.com/100x54" alt="2">
+        <img src="http://via.placeholder.com/100x63" alt="3">
+        <img src="http://via.placeholder.com/100x130" alt="4">
+        <img src="http://via.placeholder.com/100x151" alt="5">
+        <img src="http://via.placeholder.com/100x180" alt="6">
+        <img src="http://via.placeholder.com/100x190" alt="7">
+        <img src="http://via.placeholder.com/100x70" alt="8">
+        <img src="http://via.placeholder.com/100x150" alt="9">
+        <img src="http://via.placeholder.com/100x130" alt="10">
+        <img src="http://via.placeholder.com/100x160" alt="11">
+
+        
+    </div>
+    
+   
+    <script>
+        var colCount
+        var colHeightArry=[]
+        var imgWidth = $('.waterfall img').outerWidth(true)
+        
+        colCount=Math.floor($('.waterfall').width()/$('img').outerWidth(true))
+        for(var i =0;i<colCount;i++){
+            colHeightArry[i]=0
+        }
+        var minValue = colHeightArry[0]
+        var minIndex = 0
+
+        $('.waterfall img').on('load',function(){
+           
+            for(var i=0;i<colCount;i++){
+                if(colHeightArry[i]<minValue){
+                    minValue=colHeightArry[i]
+                    minIndex=i
+                }
+            }
+            $(this).css({
+                    left:minIndex*imgWidth,
+                    top:minValue
+                })
+            colHeightArry[minIndex]+=$(this).outerHeight(true) 
+            minValue = colHeightArry[minIndex]
+            console.log(123)
+            
+        })
+    </script>
+</body>
+</html>
